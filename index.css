@@ -1,0 +1,62 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  background-image:url("https://wallpapers.com/images/hd/dictionary-book-with-eyeglasses-6m6t1v8tudkifvjs.jpg");
+  background-attachment: fixed;
+  background-size:cover;
+  font-weight:bold;
+  text-align: center;
+  
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+h1{
+  text-align: center;
+  color:black;
+  font-family: 'Times New Roman', Times, serif;
+  font-size:50px;
+  
+  /*text-decoration:underline tan;
+  */
+  
+}
+
+
+/* @keyframes changeBg {
+  0%{
+    background-color:tan;
+  }
+  
+
+  20%{
+    background-color:teal;
+  }
+  40%{
+    background-color:white;
+  }
+  
+  60%{
+    background-color:red;
+  }
+  
+  80%{
+    background-color:red;
+  }
+  
+  100%{
+    background-color:red;
+  }
+  
+  
+
+} */
+
