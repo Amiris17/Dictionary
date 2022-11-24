@@ -1,7 +1,15 @@
 # Dictionary
 
 
+This project is a dictionary using API: https://dictionaryapi.dev/
 
+
+This API was extremely easy to use with little to no issues.
+
+
+# Difficulities
+
+I mainly had an issue accessing elements inside the dictionary to randomly generate a word of the day. I hope to refurbish this project in the future and implement this.
 
 
 
