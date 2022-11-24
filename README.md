@@ -13,7 +13,12 @@ I mainly had an issue accessing elements inside the dictionary to randomly gener
 
 
 
+# Website Link
 
+
+This website was hosted using Netlify.
+
+https://mirsdictionary.netlify.app/
 
 
 
