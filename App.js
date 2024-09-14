@@ -1,113 +1,86 @@
-
-import React, { useState} from "react";
-//import axios from "axios";
-import "./index.css";
-
-//fetch ("https://api.dictionaryapi.dev/api/v2/entries/en/<>")
-//.then((res)=> res.json())
-//.then((data)=>{
-//console.log(data);
-//});
+import React, { useState } from "react";
+import "./index.css"; // Import your updated CSS
 
 function App() {
-  const [word, setWord] = useState("");
-  const [definition, setDefinition] = useState("");
-  const [synonyms, setSynonyms] = useState([]);
- 
-  //const [wotd, setWOTD] = useState("");
-  // const [antonym,setAntonym]=useState('');
-
-  //Axios.get("https://api.dictionaryapi.dev/api/v2/entries/en/hello").then((res)=>{
-  //console.log(res.data);
-  const dictionary = "Mir's Dictionary";
-  // const options = {
-  //   method: "GET",
-  //   url: "https://wordoftheday2.p.rapidapi.com/words/2020-03-24",
-  //   headers: {
-  //     "X-RapidAPI-Key": "eaaca8c204mshdb3053270083268p1aaf7bjsnf626cd295d86",
-  //     "X-RapidAPI-Host": "wordoftheday2.p.rapidapi.com",
-  //   },
-  // };
-
-  // axios
-  //   .request(options)
-  //   .then(function (response) {
-  //     console.log(response.data);
-  //     setWOTD(response.data);
-  //   })
-  //   .catch(function (error) {
-  //     console.error(error);
-  //   });
-  //}
+  const [word, setWord] = useState(""); // State to hold the searched word
+  const [definition, setDefinition] = useState(""); // State to hold the word's definition
+  const [synonyms, setSynonyms] = useState([]); // State to hold synonyms
+  const [loading, setLoading] = useState(false); // State to track loading status
 
   function fetchData() {
-    var Combine = "https://api.dictionaryapi.dev/api/v2/entries/en/" + word;
-    //console.log(Combine);
-    fetch(Combine).then((res) =>
-      res.json().then((data) => {
-        console.log(data[0]);
-        setDefinition(data[0].meanings[0].definitions[0].definition);
-        setSynonyms(data[0].meanings[0].synonyms);
-        //console.log(data[0].meanings[0]) has no antonyms on API
-      })
-    );
+    const apiUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
+
+    // Set loading to true first to trigger a re-render with the spinner
+    setLoading(true);
+    setDefinition(''); // Clear definition to ensure smooth loading state
+    setSynonyms([]); // Clear synonyms
+
+    setTimeout(() => {
+      fetch(apiUrl)
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error("Word not found");
+          }
+          return res.json();
+        })
+        .then((data) => {
+          // Delay to ensure spinner stays for at least 1 second
+          setTimeout(() => {
+            setDefinition(data[0].meanings[0].definitions[0].definition);
+            setSynonyms(data[0].meanings[0].synonyms);
+            setLoading(false); // Set loading to false after data is fetched
+          }, 1000);
+        })
+        .catch((error) => {
+          setTimeout(() => {
+            setDefinition("Error: " + error.message);
+            setSynonyms([]);
+            setLoading(false); // Set loading to false after the delay
+          }, 1000);
+        });
+    }, 300); // Slight delay before fetch
   }
 
   return (
-    <>
-      <body>
-        <div className="app">
-          <h1> {dictionary}</h1>
-        </div>
-        <div className="Search">
-          <input
-            placeholder="Enter Word!"
-            onChange={(event) => {
-              setWord(event.target.value);
-            }}
-            onKeyPress={(e)=>{
-              var key=e.keycode|| e.which;
-              if (key===13)
-              {fetchData()}
-              //console.log("Works")
-            }}
-          ></input>
-          <button type="button" onClick={fetchData}>
-            Search
-          </button>
-          <br />
-          <br />
-          <p>Definition: {definition} </p>
-          <p>
-            {synonyms.map((synonym, idx) => {
-              return <p>Synonym:{synonym}</p>;
-            })}
-          </p>
-          You entered!!! : {word}
-        </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+    <div className="app-container">
+      <h1 className="app-title">Dictionary</h1>
 
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <p> If there are no results, either the word you entered is incorrect or there are no definitions for this word currently! Thank you!</p>
-      </body>
-    </>
+      <div className="search-container">
+        <input
+          className="search-input"
+          placeholder="Enter a word..."
+          onChange={(event) => setWord(event.target.value)}
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              fetchData();
+            }
+          }}
+        />
+        <button className="search-button" type="button" onClick={fetchData}>
+          Search
+        </button>
+      </div>
+
+      {loading && (
+        <div className="overlay">
+          <div className="spinner"></div>
+        </div>
+      )}
+
+      <div className="result-container">
+        {definition && <p className="definition"><strong>Definition:</strong> {definition}</p>}
+        {synonyms.length > 0 && (
+          <div className="synonyms">
+            <p><strong>Synonym(s):</strong></p>
+            <ul>
+              {synonyms.map((synonym, idx) => (
+                <li key={idx}>{synonym}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 
