@@ -1,62 +1,97 @@
+.spinner {
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #007BFF; /* Blue */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 body {
+  background-image: url('https://wallpapers.com/images/hd/dictionary-book-in-grass-6mso3hzxcrhi64w9.jpg');
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  
-  background-image:url("https://wallpapers.com/images/hd/dictionary-book-with-eyeglasses-6m6t1v8tudkifvjs.jpg");
-  background-attachment: fixed;
-  background-size:cover;
-  font-weight:bold;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f4f8; /* Soft background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-repeat:no-repeat;
+}
+.app-container {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
   text-align: center;
-  
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.app-title {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
 }
 
-h1{
-  text-align: center;
-  color:black;
-  font-family: 'Times New Roman', Times, serif;
-  font-size:50px;
-  
-  /*text-decoration:underline tan;
-  */
-  
+.search-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
+.search-input {
+  width: 60%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 1.1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
 
-/* @keyframes changeBg {
-  0%{
-    background-color:tan;
-  }
-  
+.search-input:focus {
+  border-color: #007BFF;
+}
 
-  20%{
-    background-color:teal;
-  }
-  40%{
-    background-color:white;
-  }
-  
-  60%{
-    background-color:red;
-  }
-  
-  80%{
-    background-color:red;
-  }
-  
-  100%{
-    background-color:red;
-  }
-  
-  
+.search-button {
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
 
-} */
+.search-button:hover {
+  background-color: #0056b3;
+}
 
+.result-container {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.definition {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.synonyms ul {
+  list-style: none;
+  padding: 0;
+}
+
+.synonyms li {
+  font-size: 1.1rem;
+  color: #555;
+}
